@@ -1,18 +1,25 @@
 #include <Arduino.h>
+
+// RINGCLOCK
+// Orologio analogico a LED RGB da parete 
+// Piattaforma: 
+//  NODEMCU con EPS12E, 
+//  due elettromagneti opzionali con driver a transistori
+//  WS2812B anelli a 24 LED
+// Funzioni: 
+//  Indicazione ora esatta con  NTC da internet o gestione RTC con batteria tampone
+//  Gong 
+// Credits:
+//  
 // NeoPixel Ring simple sketch (c) 2013 Shae Erisson
 // Released under the GPLv3 license to match the rest of the
 // Adafruit NeoPixel library
 
 #include <Adafruit_NeoPixel.h>
-#ifdef __AVR__
- #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
-#endif
 
 // Which pin on the Arduino is connected to the NeoPixels?
-#define PIN  D2 // On Trinket or Gemma, suggest changing this to 1
+#define PIN  D2 //Su NONEMCU ESP12 va bene D2=GPIO4
 #define ABS(N) (N<0)?-N:N
-
-// How many NeoPixels are attached to the Arduino?
 #define NUMPIXELS 24 // Popular NeoPixel ring size
 
 // When setting up the NeoPixel library, we tell it how many pixels,
@@ -87,17 +94,3 @@ void loop() {
     Nuance();
     delay(20); // Pause before next pass through loop
 }
-
-    // delay(DELAYVAL); // Pause before next pass through loop
-    // pixels.clear(); // Set all pixel colors to 'off'
-    // Media = ( livello_B + livello_G + livello_R )/3 ;
-    // Serial.printf("\n\nR,G,B=%i,%i,%i Media=%i",livello_R,livello_G,livello_B, Media);
-    // if (ABS(livello_R - Media) < 20) { livello_R /=2;}
-    // if (ABS(livello_G - Media) < 20) { livello_G /=2;}
-    // if (ABS(livello_B - Media) < 20) { livello_B /=2;}
-    // Serial.printf("\n---> R,G,B=%i,%i,%i",livello_R,livello_G,livello_B);
-    // for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
-    //     pixels.setPixelColor(i, pixels.Color(livello_R, livello_G, livello_B));
-    //     pixels.show();   // Send the updated pixel colors to the hardware.
-    //     delay(20); // Pause before next pass through loop
-    // }
